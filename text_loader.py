@@ -2,20 +2,20 @@ from langchain_community.document_loaders import TextLoader
 # from langchain_openai import ChatOpenAI
 # from langchain_core.output_parsers import StrOutputParser
 # from langchain_core.prompts import PromptTemplate
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
-# load_dotenv()
+load_dotenv()
 
-# model = ChatOpenAI()
+model = ChatOpenAI()
 
-# prompt = PromptTemplate(
-#     template='Write a summary for the following poem - \n {poem}',
-#     input_variables=['poem']
-# )
+prompt = PromptTemplate(
+    template='Write a summary for the following poem - \n {poem}',
+    input_variables=['poem']
+)
 
-#parser = StrOutputParser()
+parser = StrOutputParser()
 
-loader = TextLoader('cricket.txt', encoding='utf-8')
+loader = TextLoader('cricket.txt', encoding='utf-8') #default encoding is 'utf-8'
 
 docs = loader.load()
 
@@ -24,6 +24,6 @@ print(len(docs)) #it will give 1 as a length of lsit since only 1 document is th
 print(docs[0].page_content)
 print(docs[0].metadata)
 
-# chain = prompt | model | parser
+chain = prompt | model | parser
 
-# print(chain.invoke({'poem':docs[0].page_content}))
+print(chain.invoke({'poem':docs[0].page_content}))
